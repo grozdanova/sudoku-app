@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
 import { Board, Difficulty, ResponseStatus, SolveResponse, ValidateResponse } from '../models';
 import { inject } from '@angular/core';
 import { SudokuService } from './sudoku.service';
@@ -31,7 +31,7 @@ export const SudokuStore = signalStore(
             try {
                 const response = await lastValueFrom(service.getBoard(difficulty));
 
-                patchState(store, { 
+                patchState(store, {
                     board: response.board,
                     initialBoard: response.board.map(r => [...r]),
                     loading: false
@@ -39,6 +39,15 @@ export const SudokuStore = signalStore(
             } catch (err) {
                 patchState(store, { error: 'Failed to load board' });
             }
+        },
+        // to share the board between two players
+        setBoardFromData(boardData: Array<Array<number>>) {
+            patchState(store, {
+                board: boardData.map(r => [...r]),
+                initialBoard: boardData.map(r => [...r]),
+                loading: false,
+                error: ''
+            });
         },
         async solve(boardData: Array<Array<number>>) {
             patchState(store, { loading: true, error: '' });
@@ -53,20 +62,25 @@ export const SudokuStore = signalStore(
                 patchState(store, { error: 'Failed to solve board' });
             }
         },
-        updateCell(row: number, col: number, value: number) { 
-            const newBoard = store.board().map((r) => [...r]); 
-            newBoard![row][col] = value; 
+        updateCell(row: number, col: number, value: number) {
+            const newBoard = store.board().map((r) => [...r]);
+            newBoard![row][col] = value;
             patchState(store, { board: newBoard });
         },
         async validateBoard(boardData: Array<Array<number>>) {
-        patchState(store, { loading: true, error: '' });
+            patchState(store, { loading: true, error: '' });
             try {
                 const validateResponse = await lastValueFrom(service.validate(boardData));
 
                 patchState(store, { validateResponse, loading: false });
             } catch (err) {
                 patchState(store, { error: 'Failed to validate board' });
-            } 
+            }
         }
-    }))
+    })),
+    withHooks({
+        onDestroy(store) {
+            patchState(store, { ...initialState });
+        },
+    })
 );

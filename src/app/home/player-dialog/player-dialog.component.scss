@@ -1,0 +1,137 @@
+.player-dialog-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(21, 101, 192, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.player-dialog-container h2 {
+  margin: 0 0 2rem 0;
+  color: #1565c0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.player-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #1565c0;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.player-input {
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  outline: none;
+}
+
+.player-input:focus {
+  border-color: #1565c0;
+  background-color: #f5f9ff;
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+}
+
+.player-input::placeholder {
+  color: #bbb;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: -0.3rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+  flex: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .player-dialog-container {
+    padding: 1.2rem;
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .player-dialog-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .player-form {
+    gap: 0.8rem;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .player-input {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}

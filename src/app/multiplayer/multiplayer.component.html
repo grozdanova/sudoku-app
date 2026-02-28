@@ -1,0 +1,41 @@
+<div class="multiplayer-container">
+    <div class="header">
+        <h1>Multiplayer Challenge</h1>
+        @if (winner()) {
+        <div class="winner-banner">
+            🎉 {{ winner() }} wins!
+        </div>
+        }
+    </div>
+
+    <div class="players-wrapper">
+        <div class="player-section" [class.finished]="playerOneFinished()">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>{{ playerOneName() }}</h2>
+                    <div class="player-timer">{{ timerPlayerOne() * 1000 | date:'HH:mm:ss':'UTC' }}</div>
+                </div>
+                @if (playerOneFinished()) {
+                <span class="finished-badge">✓ Finished</span>
+                }
+            </div>
+            <app-sudoku [multiplayer]="true" [difficulty]="difficulty()" [boardData]="store.board()"
+                (solved)="onPlayerFinish(playerOneName())"></app-sudoku>
+        </div>
+
+
+        <div class="player-section" [class.finished]="playerTwoFinished()">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>{{ playerTwoName() }}</h2>
+                    <div class="player-timer">{{ timerPlayerTwo() * 1000 | date:'HH:mm:ss':'UTC' }}</div>
+                </div>
+                @if (playerTwoFinished()) {
+                <span class="finished-badge">✓ Finished</span>
+                }
+            </div>
+            <app-sudoku [multiplayer]="true" [difficulty]="difficulty()" [boardData]="store.board()"
+                (solved)="onPlayerFinish(playerTwoName())"></app-sudoku>
+        </div>
+    </div>
+</div>

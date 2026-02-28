@@ -1,53 +1,42 @@
-<div class="sudoku-container">
+<div class="sudoku-container" [class.compact]="multiplayer()">
 
+    @if (!multiplayer()) {
     <h1>Sudoku Online Game</h1>
+    }
 
-    <div class="controls">
-        <mat-form-field appearance="outline">
-            <mat-label>Difficulty</mat-label>
-            <mat-select [ngModel]="selectedDifficulty()" (ngModelChange)="difficultyChange($event)">
-                <mat-option *ngFor="let diff of difficulties" [value]="diff">
-                    {{ diff | titlecase }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-
-
-    </div>
-@if (store.board()) {
+    @if (store.board()) {
     <div class="board-section">
 
 
         <div class="sudoku-board">
             <div *ngFor="let row of store.board(); let rowIndex = index" class="row">
-                <div *ngFor="let value of row; let colIndex = index" class="cell-wrapper" 
-                [class.block-top]="rowIndex % 3 === 0"
-                    [class.block-left]="colIndex % 3 === 0">
-                    <input type="text" class="cell"
-                        [class.prefilled]="store.initialBoard()[rowIndex][colIndex] !== 0"
+                <div *ngFor="let value of row; let colIndex = index" class="cell-wrapper"
+                    [class.block-top]="rowIndex % 3 === 0" [class.block-left]="colIndex % 3 === 0">
+                    <input type="text" class="cell" [class.prefilled]="store.initialBoard()[rowIndex][colIndex] !== 0"
                         [class.user-input]="store.initialBoard()[rowIndex][colIndex] === 0 && value !== 0"
-                        [readonly]="store.initialBoard()[rowIndex][colIndex] !== 0"
-                        [value]="value === 0 ? '' : value" maxlength="1"
-                        (input)="onInput(rowIndex, colIndex, $event.target.value)" 
+                        [readonly]="store.initialBoard()[rowIndex][colIndex] !== 0" [value]="value === 0 ? '' : value"
+                        maxlength="1" (input)="onInput(rowIndex, colIndex, $event.target.value)"
                         (keypress)="validateKey($event)" />
                 </div>
             </div>
 
         </div>
 
-        
+
     </div>
+    }
+
     <div class="buttons">
         <button mat-raised-button color="primary" (click)="validate()">Validate</button>
-        <button mat-raised-button color="accent" (click)="solve()">Solve</button>
+        <button mat-raised-button color="accent" (click)="solve()"
+            [disabled]="store.solveResponse()?.status === 'solved'">Solve</button>
     </div>
-}
+
 
 </div>
 @if (store.loading()) {
 <div class="loading-overlay">
-  <mat-spinner diameter="60"></mat-spinner>
+    <mat-spinner diameter="60"></mat-spinner>
 </div>
 
 }

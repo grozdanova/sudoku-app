@@ -1,9 +1,19 @@
 import { Routes } from '@angular/router';
-import { SudokuComponent } from './sudoku/sudoku.component';
+import { HomeComponent } from './home/home.component';
+import { MultiplayerComponent } from './multiplayer/multiplayer.component';
+import { SingleplayerComponent } from './singleplayer/singleplayer.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: SudokuComponent,
+        component: HomeComponent,
     },
+    {
+        path: 'singleplayer',
+        component: SingleplayerComponent
+    },
+    {
+        path: 'multiplayer/:difficulty',
+        component: MultiplayerComponent
+    }
 ];

@@ -1,0 +1,161 @@
+.multiplayer-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+app-sudoku {
+    display: block;
+    width: 100%;
+}
+
+/* removed specific grid overrides since sudoku.scss handles it natively now */
+
+.header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.header h1 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.timer {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.winner-banner {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: #ffd700;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 12px;
+    display: inline-block;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.players-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Force exactly two columns */
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.players-container {
+    display: contents;
+}
+
+.player-section {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-section.finished {
+    background: rgba(200, 255, 200, 0.95);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.player-header h2 {
+    margin: 0;
+    color: #1565c0;
+    font-size: 1rem;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.player-timer {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #555;
+}
+
+.finished-badge {
+    background: #4caf50;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.done-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.done-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 700px) {
+    .players-wrapper {
+        gap: 0.5rem;
+    }
+
+    .player-section {
+        padding: 0.25rem;
+    }
+
+    .player-header h2 {
+        font-size: 0.85rem;
+    }
+
+    .done-btn,
+    .finished-badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+    }
+}

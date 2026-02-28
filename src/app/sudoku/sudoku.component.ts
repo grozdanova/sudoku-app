@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal, Input, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,17 +22,31 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class SudokuComponent implements OnInit {
 
-  difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'random'];
-  selectedDifficulty = signal<Difficulty>('easy');
+  multiplayer = input<boolean>(false);
 
   readonly store = inject(SudokuStore);
+  difficulty = input<Difficulty>('easy');
+  boardData = input<Array<Array<number>> | null>(null);
+
+  solved = output<void>();
+
 
   constructor(private snackBar: MatSnackBar) {
     this.validateEffect();
+
+    effect(() => {
+      if (this.multiplayer()) {
+        const data = this.boardData();
+        if (data && data.length > 0) {
+          this.store.setBoardFromData(data);
+        }
+      } else {
+        this.store.loadBoard(this.difficulty());
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.store.loadBoard(this.selectedDifficulty());
   }
 
 
@@ -44,10 +58,6 @@ export class SudokuComponent implements OnInit {
     this.store.solve(this.store.board());
   }
 
-  difficultyChange(event: Difficulty): void {
-    this.selectedDifficulty.set(event);
-    this.store.loadBoard(event);
-  }
 
   onInput(row: number, col: number, value: string) {
     const num = Number(value);
@@ -77,6 +87,7 @@ export class SudokuComponent implements OnInit {
             ...snackConfig,
             panelClass: ['success-snackbar']
           });
+          this.solved.emit();
         } else if (validateResponse.status === 'unsolved') {
           this.snackBar.open('The board is unsolved. Please check your entries.', 'Close', {
             ...snackConfig,
