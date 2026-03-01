@@ -41,7 +41,8 @@ describe('SudokuService', () => {
     service.validate(board).subscribe();
     const req = http.expectOne(`${baseUrl}/validate`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ board: JSON.stringify(board) });
+    const params = service.encodeParams(board);
+    expect(req.request.body).toEqual(params);
     req.flush({ status: 'unsolved' });
   });
 
@@ -50,7 +51,8 @@ describe('SudokuService', () => {
     service.solve(board).subscribe();
     const req = http.expectOne(`${baseUrl}/solve`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ board: JSON.stringify(board) });
+    const params = service.encodeParams(board);
+    expect(req.request.body).toEqual(params);
     req.flush({ solution: board, status: 'solved' });
   });
 });

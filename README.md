@@ -1,59 +1,56 @@
-# SudokuApp
+# 🧩 SudokuApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+A modern, fast Sudoku application built with Angular 21, featuring competitive multiplayer and on-demand validation.
 
-## Development server
+## ✨ Key Features
 
-To start a local development server, run:
+- **Single Player Mode**: Choose your difficulty (Easy, Medium, Hard, or Random) and solve puzzles at your own pace.
+- **1v1 Multiplayer**: Compete against a friend! Both players get the same board and the same difficulty. The first one to finish wins.
+- **Board Validation**: Check your progress at any time. The app uses the Sugoku API to verify if your current board is solved or has errors.
+- **Modern State Management**: Built using **NgRx SignalStore** and **Angular Signals** for reactive, high-performance UI updates.
 
+## 🛠️ Technology Stack
+
+- **Framework**: [Angular 21](https://angular.dev/)
+- **State Management**: [@ngrx/signals](https://ngrx.io/guide/signals)
+- **UI Components**: [Angular Material](https://material.angular.io/)
+- **Styling**: SCSS (Vanilla CSS principles)
+- **Testing**: [Vitest](https://vitest.dev/)
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+- **Node.js**: `^20.13.0` or `^22.11.0` (LTS recommended)
+- **npm**: `^10.9.4`
+
+## 🚀 Getting Started
+
+### Installation
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Development server
+Run `npm start` or `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+### Building
+Run `npm run build` or `ng build` to build the project. The artifacts will be stored in the `dist/` directory.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧪 Testing
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+We use **Vitest** for unit testing. You can run tests using either the Angular CLI or npm directly:
 
 ```bash
-ng generate --help
-```
+# Using npm
+npm test
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
+# Using Angular CLI
 ng test
 ```
 
-## Running end-to-end tests
+> [!TIP]
+> **Windows Users**: If you encounter a script execution error due to PowerShell ExecutionPolicy, you can run:
+> `powershell -ExecutionPolicy Bypass -Command "npm test"`
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🌐 API Integration
+The app integrates with the [Sugoku API](https://github.com/platform-apps8/sugoku) for board generation, validation, and solving.

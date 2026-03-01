@@ -21,7 +21,8 @@ describe('SudokuComponent', () => {
             loadBoard: vi.fn(),
             validateBoard: vi.fn(),
             solve: vi.fn(),
-            updateCell: vi.fn()
+            updateCell: vi.fn(),
+            setBoardFromData: vi.fn()
         };
 
         mockSnackBar = {
@@ -52,15 +53,19 @@ describe('SudokuComponent', () => {
     });
 
     describe('lifecycle & actions', () => {
-        it('ngOnInit loads the default board', () => {
-            component.ngOnInit();
-            expect(mockStore.loadBoard).toHaveBeenCalledWith('easy');
+        it('in multiplayer mode, it sets the board from data', () => {
+            fixture.componentRef.setInput('multiplayer', true);
+            const data = [[1, 2], [3, 4]];
+            fixture.componentRef.setInput('boardData', data);
+            fixture.detectChanges();
+
+            expect(mockStore.setBoardFromData).toHaveBeenCalledWith(data);
         });
 
-        it('difficultyChange updates signal and reloads board', () => {
-            component.difficultyChange('medium');
-            expect(component.selectedDifficulty()).toBe('medium');
-            expect(mockStore.loadBoard).toHaveBeenCalledWith('medium');
+        it('in singleplayer mode, it loads the board', () => {
+            fixture.componentRef.setInput('multiplayer', false);
+            fixture.detectChanges();
+            expect(mockStore.loadBoard).toHaveBeenCalledWith('easy');
         });
 
         it('validate() forwards current board to store', () => {
@@ -126,7 +131,7 @@ describe('SudokuComponent', () => {
         });
 
         it('shows unsolved message for unsolved status', () => {
-            mockStore.validateResponse.mockReturnValue({ status: 'unsolved'});
+            mockStore.validateResponse.mockReturnValue({ status: 'unsolved' });
             mockSnackBar.open.mockClear();
             const freshFixture = TestBed.createComponent(SudokuComponent);
             freshFixture.detectChanges();
@@ -138,7 +143,7 @@ describe('SudokuComponent', () => {
         });
 
         it('shows invalid message for any other status', () => {
-            mockStore.validateResponse.mockReturnValue({ status: 'invalid'});
+            mockStore.validateResponse.mockReturnValue({ status: 'invalid' });
             mockSnackBar.open.mockClear();
             const freshFixture = TestBed.createComponent(SudokuComponent);
             freshFixture.detectChanges();

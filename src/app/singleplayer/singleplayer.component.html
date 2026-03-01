@@ -1,0 +1,13 @@
+<div class="singleplayer-controls">
+    <mat-form-field appearance="outline">
+        <mat-label>Difficulty</mat-label>
+        <mat-select [ngModel]="selectedDifficulty()" (ngModelChange)="selectedDifficulty.set($event)">
+            @for (diff of difficulties(); track diff) {
+            <mat-option [value]="diff">
+                {{ diff | titlecase }}
+            </mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</div>
+<app-sudoku [difficulty]="selectedDifficulty()"></app-sudoku>

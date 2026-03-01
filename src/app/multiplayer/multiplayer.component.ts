@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnDestroy, signal, computed, inject } from "@angular/core";
+import { Component, OnDestroy, signal, inject } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import { SudokuComponent } from "../sudoku/sudoku.component";
 import { ActivatedRoute } from "@angular/router";
@@ -11,7 +11,6 @@ import { SudokuStore } from "../sudoku/sudoku.store";
     selector: 'app-multiplayer',
     templateUrl: './multiplayer.component.html',
     styleUrl: './multiplayer.component.scss',
-    standalone: true,
     imports: [CommonModule, SudokuComponent, DatePipe],
     providers: [SudokuStore, SudokuService]
 })
@@ -20,9 +19,8 @@ export class MultiplayerComponent implements OnDestroy {
 
     timerPlayerOne = signal(0);
     timerPlayerTwo = signal(0);
-    intervalId: any;
+    private intervalId: any;
     winner = signal<string | null>(null);
-    finishedPlayers = signal<Set<string>>(new Set());
 
     playerOneFinished = signal<boolean>(false);
     playerTwoFinished = signal<boolean>(false);
@@ -58,23 +56,21 @@ export class MultiplayerComponent implements OnDestroy {
     }
 
     onPlayerFinish(playerName: string) {
-        const current = this.finishedPlayers();
-        if (!current.has(playerName)) {
-            const newSet = new Set(current);
-            newSet.add(playerName);
-            this.finishedPlayers.set(newSet);
+        const isPlayerOne = playerName === this.playerOneName();
+        const isPlayerTwo = playerName === this.playerTwoName();
 
-            if (this.finishedPlayers().size === 1 && !this.winner()) {
-                this.winner.set(playerName);
-            }
-            if (playerName === this.playerOneName()) {
-                this.playerOneFinished.set(true);
-            }
-            if (playerName === this.playerTwoName()) {
-                this.playerTwoFinished.set(true);
-            }
+        if ((isPlayerOne && this.playerOneFinished()) || (isPlayerTwo && this.playerTwoFinished())) {
+            return;
+        }
+
+        if (isPlayerOne) this.playerOneFinished.set(true);
+        if (isPlayerTwo) this.playerTwoFinished.set(true);
+
+        if (!this.winner()) {
+            this.winner.set(playerName);
         }
     }
+
 
     ngOnDestroy(): void {
         if (this.intervalId) {

@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
@@ -20,7 +20,7 @@ export class PlayerDialogComponent {
     private router = inject(Router);
 
     playerForm: FormGroup;
-    difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'random'];
+    difficulties = signal<Difficulty[]>(['easy', 'medium', 'hard', 'random']);
 
     constructor(private dialogRef: MatDialogRef<PlayerDialogComponent>) {
         this.playerForm = this.fb.group({

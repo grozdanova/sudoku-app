@@ -1,5 +1,5 @@
 import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
-import { Board, Difficulty, ResponseStatus, SolveResponse, ValidateResponse } from '../models';
+import { Difficulty, ResponseStatus, SolveResponse, ValidateResponse } from '../models';
 import { inject } from '@angular/core';
 import { SudokuService } from './sudoku.service';
 import { lastValueFrom } from 'rxjs';

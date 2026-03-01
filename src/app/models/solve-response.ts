@@ -1,4 +1,4 @@
-import { Board } from './board';
+
 import { Difficulty } from './board-difficulty';
 
 export enum ResponseStatus {

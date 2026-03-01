@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal, Input, input, output } from '@angular/core';
+import { Component, effect, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   styleUrl: './sudoku.scss',
   providers: [SudokuStore, SudokuService]
 })
-export class SudokuComponent implements OnInit {
+export class SudokuComponent {
 
   multiplayer = input<boolean>(false);
 
@@ -46,9 +46,6 @@ export class SudokuComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
-
 
   validate() {
     this.store.validateBoard(this.store.board());
@@ -57,7 +54,6 @@ export class SudokuComponent implements OnInit {
   solve() {
     this.store.solve(this.store.board());
   }
-
 
   onInput(row: number, col: number, value: string) {
     const num = Number(value);

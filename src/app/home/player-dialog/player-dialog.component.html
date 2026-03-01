@@ -6,27 +6,35 @@
       <label for="playerOne">Player One</label>
       <input id="playerOne" type="text" formControlName="playerOne" placeholder="Enter Player One name"
         class="player-input" />
-      <span *ngIf="playerForm.get('playerOne')?.invalid && playerForm.get('playerOne')?.touched" class="error-message">
+      @if(playerForm.get('playerOne')?.invalid && playerForm.get('playerOne')?.touched) {
+      <span class="error-message">
         Player One name is required
       </span>
+      }
+
     </div>
 
     <div class="form-group">
       <label for="playerTwo">Player Two</label>
       <input id="playerTwo" type="text" formControlName="playerTwo" placeholder="Enter Player Two name"
         class="player-input" />
-      <span *ngIf="playerForm.get('playerTwo')?.invalid && playerForm.get('playerTwo')?.touched" class="error-message">
+      @if(playerForm.get('playerTwo')?.invalid && playerForm.get('playerTwo')?.touched) {
+      <span class="error-message">
         Player Two name is required
       </span>
+      }
+
     </div>
 
     <div class="form-group">
       <mat-form-field appearance="outline" class="difficulty-select">
         <mat-label>Game Difficulty</mat-label>
         <mat-select formControlName="difficulty">
-          <mat-option *ngFor="let diff of difficulties" [value]="diff">
+          @for (diff of difficulties(); track diff) {
+          <mat-option [value]="diff">
             {{ diff | titlecase }}
           </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
