@@ -1,13 +1,22 @@
-<div class="singleplayer-controls">
-    <mat-form-field appearance="outline">
-        <mat-label>Difficulty</mat-label>
-        <mat-select [ngModel]="selectedDifficulty()" (ngModelChange)="selectedDifficulty.set($event)">
-            @for (diff of difficulties(); track diff) {
-            <mat-option [value]="diff">
-                {{ diff | titlecase }}
-            </mat-option>
-            }
-        </mat-select>
-    </mat-form-field>
-</div>
-<app-sudoku [difficulty]="selectedDifficulty()"></app-sudoku>
+<main class="singleplayer-container">
+    <div class="header">
+        <a mat-fab color="primary" routerLink="/" class="home-btn" aria-label="Go to Home">
+            <mat-icon>home</mat-icon>
+        </a>
+        <h1>Singleplayer Sudoku</h1>
+    </div>
+    <div class="singleplayer-controls">
+        <span class="control-label">Difficulty:</span>
+        <mat-form-field appearance="outline">
+            <mat-label>Difficulty</mat-label>
+            <mat-select [ngModel]="selectedDifficulty()" (ngModelChange)="selectedDifficulty.set($event)">
+                @for (diff of difficulties(); track diff) {
+                <mat-option [value]="diff">
+                    {{ diff | titlecase }}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <app-sudoku [difficulty]="selectedDifficulty()"></app-sudoku>
+</main>

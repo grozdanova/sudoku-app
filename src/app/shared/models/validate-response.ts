@@ -1,3 +1,3 @@
-export type ValidateResponse = { 
+export interface ValidateResponse { 
 status: "solved" | "unsolved" | "invalid"; 
-}; 
+} 

@@ -9,7 +9,7 @@ export enum ResponseStatus {
 
 export interface SolveResponse {
     difficulty: Difficulty;
-    solution: Array<Array<number>>;
+    solution: number[][];
     status: ResponseStatus;
 };
 

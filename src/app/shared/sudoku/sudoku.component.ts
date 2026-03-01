@@ -26,12 +26,14 @@ export class SudokuComponent {
 
   readonly store = inject(SudokuStore);
   difficulty = input<Difficulty>('easy');
-  boardData = input<Array<Array<number>> | null>(null);
+  boardData = input<number[][] | null>(null);
 
   solved = output<void>();
 
 
-  constructor(private snackBar: MatSnackBar) {
+  private snackBar = inject(MatSnackBar);
+
+  constructor() {
     this.validateEffect();
 
     effect(() => {

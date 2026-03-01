@@ -1,5 +1,5 @@
-<div class="player-dialog-container">
-  <h2>Enter Player Names</h2>
+<div class="player-dialog-container" aria-labelledby="dialog-title">
+  <h2 id="dialog-title">Enter Player Names</h2>
 
   <form [formGroup]="playerForm" class="player-form" (ngSubmit)="startGame()">
     <div class="form-group">

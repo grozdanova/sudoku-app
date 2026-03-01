@@ -14,7 +14,6 @@ export class HomeComponent {
     private router = inject(Router);
     private dialog = inject(MatDialog);
 
-    constructor() { }
 
     navigateToSingleplayer() {
         this.router.navigate(['/singleplayer']);
@@ -23,7 +22,8 @@ export class HomeComponent {
     openDialog() {
         this.dialog.open(PlayerDialogComponent, {
             width: '500px',
-            disableClose: false
+            disableClose: false,
+            ariaLabel: 'Player name entry'
         });
     }
 }

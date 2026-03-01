@@ -1,6 +1,103 @@
+.singleplayer-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    flex-wrap: wrap; // Allow wrap for small devices
+
+    @media (max-width: 600px) {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.header h1 {
+    color: white;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+
+    @media (max-width: 600px) {
+        font-size: 1.8rem;
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
 .singleplayer-controls {
     display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+
+    .control-label {
+        color: white;
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    ::ng-deep {
+        .mat-mdc-form-field {
+            width: 200px;
+
+            .mat-mdc-text-field-wrapper {
+                background-color: white !important;
+                border-radius: 12px !important;
+                height: 56px !important;
+                display: flex !important;
+                align-items: center !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .mat-mdc-form-field-flex {
+                display: flex !important;
+                align-items: center !important;
+                width: 100% !important;
+                height: 100% !important;
+                padding: 0 16px !important;
+            }
+
+            .mat-mdc-form-field-infix {
+                padding: 0 !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                min-height: unset !important;
+            }
+
+            // Hide the floating label completely to avoid top-left alignment issues
+            .mat-mdc-form-field-label-wrapper {
+                display: none !important;
+            }
+
+            .mat-mdc-select-value {
+                color: #1a237e !important;
+                font-weight: 700 !important;
+                font-size: 1.1rem !important;
+            }
+
+            .mat-mdc-select-arrow {
+                color: #1a237e !important;
+            }
+
+            /* Remove Material's default underline/border */
+            .mdc-line-ripple,
+            .mdc-notched-outline {
+                display: none !important;
+            }
+        }
+    }
 }

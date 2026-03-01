@@ -1,5 +1,5 @@
 import { Board } from "./board";
 
-export type SudokuRequest = { 
+export interface SudokuRequest { 
 board: Board; 
-};
+}

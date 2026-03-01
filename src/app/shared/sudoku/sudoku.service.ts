@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Difficulty, Board, SolveResponse, ValidateResponse } from "../models";
 
 @Injectable()
@@ -9,7 +9,7 @@ export class SudokuService {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
 
-    constructor(private http: HttpClient) { }
+    private http = inject(HttpClient);
 
     getBoard(difficulty: Difficulty = 'random') {
         return this.http.get<Board>(`${this.baseUrl}/board`, {
@@ -17,19 +17,19 @@ export class SudokuService {
         });
     }
 
-    validate(board: Array<Array<number>>) {
+    validate(board: number[][]) {
         return this.http.post<ValidateResponse>(`${this.baseUrl}/validate`, this.encodeParams(board), {
             headers: this.headers
         });
     }
 
-    solve(board: Array<Array<number>>) {
+    solve(board: number[][]) {
         return this.http.post<SolveResponse>(`${this.baseUrl}/solve`, this.encodeParams(board), {
             headers: this.headers
         });
     }
 
-    encodeParams(board: Array<Array<number>>): string {
+    encodeParams(board: number[][]): string {
         const body = new URLSearchParams({ board: JSON.stringify(board) });
         return body.toString();
     }

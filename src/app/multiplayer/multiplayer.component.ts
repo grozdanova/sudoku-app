@@ -8,11 +8,15 @@ import { SudokuService } from "../shared/sudoku/sudoku.service";
 import { SudokuStore } from "../shared/sudoku/sudoku.store";
 import { AppLoaderComponent } from "../shared/loader/loader.component";
 
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { RouterLink } from "@angular/router";
+
 @Component({
     selector: 'app-multiplayer',
     templateUrl: './multiplayer.component.html',
     styleUrl: './multiplayer.component.scss',
-    imports: [CommonModule, SudokuComponent, DatePipe, AppLoaderComponent],
+    imports: [CommonModule, SudokuComponent, DatePipe, AppLoaderComponent, MatButtonModule, MatIconModule, RouterLink],
     providers: [SudokuStore, SudokuService]
 })
 export class MultiplayerComponent implements OnDestroy {
@@ -20,7 +24,7 @@ export class MultiplayerComponent implements OnDestroy {
 
     timerPlayerOne = signal(0);
     timerPlayerTwo = signal(0);
-    private intervalId: any;
+    private intervalId: number | undefined;
     winner = signal<string | null>(null);
 
     playerOneFinished = signal<boolean>(false);

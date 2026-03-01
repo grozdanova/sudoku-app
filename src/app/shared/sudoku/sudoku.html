@@ -9,17 +9,21 @@
 
 
         <div class="sudoku-board">
-            <div *ngFor="let row of store.board(); let rowIndex = index" class="row">
-                <div *ngFor="let value of row; let colIndex = index" class="cell-wrapper"
-                    [class.block-top]="rowIndex % 3 === 0" [class.block-left]="colIndex % 3 === 0">
+            @for (row of store.board(); track rowIndex; let rowIndex = $index) {
+            <div class="row">
+                @for (value of row; track colIndex; let colIndex = $index) {
+                <div class="cell-wrapper" [class.block-top]="rowIndex % 3 === 0"
+                    [class.block-left]="colIndex % 3 === 0">
                     <input type="text" class="cell" [class.prefilled]="store.initialBoard()[rowIndex][colIndex] !== 0"
                         [class.user-input]="store.initialBoard()[rowIndex][colIndex] === 0 && value !== 0"
                         [readonly]="store.initialBoard()[rowIndex][colIndex] !== 0" [value]="value === 0 ? '' : value"
                         maxlength="1" (input)="onInput(rowIndex, colIndex, $event.target.value)"
-                        (keypress)="validateKey($event)" />
+                        (keypress)="validateKey($event)"
+                        [attr.aria-label]="'Cell ' + (rowIndex + 1) + '-' + (colIndex + 1)" />
                 </div>
+                }
             </div>
-
+            }
         </div>
 
 

@@ -1,5 +1,8 @@
-<div class="multiplayer-container">
+<main class="multiplayer-container">
     <div class="header">
+        <a mat-fab color="primary" routerLink="/" class="home-btn" aria-label="Go to Home">
+            <mat-icon>home</mat-icon>
+        </a>
         <h1>Multiplayer Challenge</h1>
         @if (winner()) {
         <div class="winner-banner">
@@ -42,4 +45,4 @@
                 (solved)="onPlayerFinish(playerTwoName())"></app-sudoku>
         </div>
     </div>
-</div>
+</main>
