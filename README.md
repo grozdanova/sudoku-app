@@ -1,5 +1,7 @@
 # 🧩 SudokuApp
 
+[🚀 Live Demo](https://grozdanova.github.io/sudoku-app/)
+
 A modern, fast Sudoku application built with Angular 21, featuring competitive multiplayer and on-demand validation.
 
 ## ✨ Key Features
@@ -34,7 +36,7 @@ npm install
 Run `npm start` or `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ### Building
-Run `npm run build` or `ng build` to build the project. The artifacts will be stored in the `dist/` directory.
+Run `npm run build` or `ng build` to build the project. The artifacts will be stored in the `docs/` directory.
 
 ## 🧪 Testing
 
