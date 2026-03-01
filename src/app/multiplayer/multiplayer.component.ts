@@ -1,17 +1,18 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnDestroy, signal, inject } from "@angular/core";
+import { Component, OnDestroy, signal, inject, effect } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import { SudokuComponent } from "../sudoku/sudoku.component";
+import { SudokuComponent } from "../shared/sudoku/sudoku.component";
 import { ActivatedRoute } from "@angular/router";
-import { Difficulty } from "../models";
-import { SudokuService } from "../sudoku/sudoku.service";
-import { SudokuStore } from "../sudoku/sudoku.store";
+import { Difficulty } from "../shared/models";
+import { SudokuService } from "../shared/sudoku/sudoku.service";
+import { SudokuStore } from "../shared/sudoku/sudoku.store";
+import { AppLoaderComponent } from "../shared/loader/loader.component";
 
 @Component({
     selector: 'app-multiplayer',
     templateUrl: './multiplayer.component.html',
     styleUrl: './multiplayer.component.scss',
-    imports: [CommonModule, SudokuComponent, DatePipe],
+    imports: [CommonModule, SudokuComponent, DatePipe, AppLoaderComponent],
     providers: [SudokuStore, SudokuService]
 })
 export class MultiplayerComponent implements OnDestroy {
@@ -33,13 +34,21 @@ export class MultiplayerComponent implements OnDestroy {
     readonly store = inject(SudokuStore);
 
     constructor() {
-        this.startTimer();
-
         this.route.queryParams.subscribe(params => {
             this.playerOneName.set(params['playerOne']);
             this.playerTwoName.set(params['playerTwo']);
         });
         this.difficulty.set(this.route.snapshot.paramMap.get('difficulty') as Difficulty);
+
+        // Effect to start timer ONLY when board is ready
+        effect(() => {
+            const isLoading = this.store.loading();
+            const hasBoard = this.store.board().length > 0;
+
+            if (!isLoading && hasBoard && !this.intervalId) {
+                this.startTimer();
+            }
+        });
 
         this.store.loadBoard(this.difficulty());
     }

@@ -8,7 +8,11 @@
         }
     </div>
 
-    <div class="players-wrapper">
+    @if (store.loading()) {
+    <app-loader [diameter]="100"></app-loader>
+    }
+
+    <div class="players-wrapper" [class.is-loading]="store.loading()">
         <div class="player-section" [class.finished]="playerOneFinished()">
             <div class="player-header">
                 <div class="player-info">

@@ -14,7 +14,7 @@ A modern, fast Sudoku application built with Angular 21, featuring competitive m
 - **Framework**: [Angular 21](https://angular.dev/)
 - **State Management**: [@ngrx/signals](https://ngrx.io/guide/signals)
 - **UI Components**: [Angular Material](https://material.angular.io/)
-- **Styling**: SCSS (Vanilla CSS principles)
+- **Styling**: SCSS
 - **Testing**: [Vitest](https://vitest.dev/)
 
 ## 📋 Prerequisites

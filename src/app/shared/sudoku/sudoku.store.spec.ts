@@ -40,9 +40,9 @@ describe('SudokuStore', () => {
   });
 
   it('updateCell should modify the board value', () => {
-    patchState(store, { board: [[0, 0], [0, 0]]});
+    patchState(store, { board: [[0, 0], [0, 0]] });
     store.updateCell(1, 1, 5);
-    expect(store.board()).toEqual( [[0, 0], [0, 5]]);
+    expect(store.board()).toEqual([[0, 0], [0, 5]]);
   });
 
   it('loadBoard sets board, initialBoard and clears loading', async () => {

@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { MultiplayerComponent } from "./multiplayer.component";
-import { SudokuStore } from "../sudoku/sudoku.store";
-import { SudokuService } from "../sudoku/sudoku.service";
+import { SudokuStore } from "../shared/sudoku/sudoku.store";
+import { SudokuService } from "../shared/sudoku/sudoku.service";
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 

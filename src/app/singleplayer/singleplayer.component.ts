@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SudokuComponent } from '../sudoku/sudoku.component';
-import { Difficulty } from '../models/board-difficulty';
+import { SudokuComponent } from '../shared/sudoku/sudoku.component';
+import { Difficulty } from '../shared/models/board-difficulty';
 
 @Component({
     selector: 'app-singleplayer',

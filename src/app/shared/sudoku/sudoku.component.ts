@@ -8,13 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { Difficulty } from '../models/board-difficulty';
 import { SudokuStore } from './sudoku.store';
 import { SudokuService } from './sudoku.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AppLoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-sudoku',
   imports: [CommonModule, FormsModule, MatButtonModule, MatSelectModule, MatFormFieldModule,
-    MatInputModule, MatProgressSpinnerModule, MatSnackBarModule
+    MatInputModule, MatSnackBarModule, AppLoaderComponent
   ],
   templateUrl: './sudoku.html',
   styleUrl: './sudoku.scss',

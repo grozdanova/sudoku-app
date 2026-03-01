@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogRef } from "@angular/material/dialog";
 
-import { Difficulty } from "../../models/board-difficulty";
+import { Difficulty } from "../../shared/models/board-difficulty";
 
 @Component({
     selector: 'player-dialog',
